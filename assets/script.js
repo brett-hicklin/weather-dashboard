@@ -88,8 +88,11 @@
  }
 
  function show5DayForecast(temperatureData) {
+  var today = dayjs()
 for (var i=1; i<6; i++){
-  var temp = temperatureData.list[i].main.temp;
+   $(`#day${[i]}`).text(today.add(i,'day').format("M[/]D[/]YYYY"))
+
+   var temp = temperatureData.list[i].main.temp;
    $(`#tempDay${[i]}`).text(`Temp: ${temp} F`);
    var wind = temperatureData.list[i].wind.speed;
    $(`#windDay${[i]}`).text(`Wind: ${wind} MPH`);
