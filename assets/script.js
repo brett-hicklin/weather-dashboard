@@ -7,17 +7,42 @@
  
 
 
- var requestedCity = $('input:text').val()
- var searchBtn = $('#searchBtn')
- searchBtn.on("click",runFetch)
+ var requestedCity = $("input:text").val();
+ var searchBtn = $("#searchBtn");
+ var unorderedCityList = $('#cityList')
+ 
+ searchBtn.on("click", runFetch);
 
  function runFetch(event) {
    event.preventDefault();
-   var userInput = $("#search")
-  var userInputValue = userInput.val()
-  var cityToCoord = `http://api.openweathermap.org/geo/1.0/direct?q=${userInputValue},US&APPID=c30d18cd0f8a02106652813da038e7c8`
+   var userInputArray = JSON.parse(localStorage.getItem("recentCity"))
+   
+   var userInput = $("#search");
+   var userInputValue = userInput.val();
+   var cityToCoord = `http://api.openweathermap.org/geo/1.0/direct?q=${userInputValue},US&APPID=c30d18cd0f8a02106652813da038e7c8`;
 
    console.log(userInput.val());
+  
+   if (userInputArray === null) {
+    userInputArray = [];
+  }
+
+  userInputArray.push(userInputValue)
+   localStorage.setItem("recentCity",JSON.stringify(userInputArray))
+    
+  for (var i = 0; i<userInputArray.length; i++){
+    var buttonEl = $('<button>')
+    buttonEl.text(userInputArray[i])
+    console.log(buttonEl.text())
+    unorderedCityList.append(buttonEl)
+    var newLine = $('<div>')
+    unorderedCityList.append(newLine)
+
+  }
+
+
+   userInput = userInput.val("");
+
 
    fetch(cityToCoord)
      .then(function (response) {
@@ -42,42 +67,42 @@
      });
  }
 
+ function showTemperatureStats(temperatureData) {
+   var currentTemp = temperatureData.list[0].main.temp;
+   var currentWind = temperatureData.list[0].wind.speed;
+   var currentHumidity = temperatureData.list[0].main.humidity;
 
-function showTemperatureStats(temperatureData){
-  var currentTemp = temperatureData.list[0].main.temp
-  var currentWind = temperatureData.list[0].wind.speed
-  var currentHumidity = temperatureData.list[0].main.humidity
+   var today = dayjs();
+   var cityName = $("#cityName").text(
+     `${temperatureData.city.name} ${today.format("M[/]D[/]YYYY")}`
+   );
+   //look up degrees symbol
+   $("#temp").text(`Temp: ${currentTemp} F`);
+   $("#wind").text(`Wind: ${currentWind} MPH`);
+   $("#humidity").text(`Humidity: ${currentHumidity}%`);
+ }
 
-  var today = dayjs();
-  var cityName = $('#cityName').text(`${temperatureData.city.name} ${today.format("M[/]D[/]YYYY")}`)  
-  //look up degrees symbol
-$('#temp').text(`Temp: ${currentTemp} F`);
-$('#wind').text(`Wind: ${currentWind} MPH`);
-$('#humidity').text(`Humidity: ${currentHumidity}%`)
+ function show5DayForecast(temperatureData) {
+   var day1Temp = temperatureData.list[1].main.temp;
+   var day1Wind = temperatureData.list[1].wind.speed;
+   var day1Humidity = temperatureData.list[1].main.humidity;
 
-}
+   var day2Temp = temperatureData.list[2].main.temp;
+   var day2Wind = temperatureData.list[2].wind.speed;
+   var day2Humidity = temperatureData.list[2].main.humidity;
 
-function show5DayForecast(temperatureData){
-  var day1Temp = temperatureData.list[1].main.temp
-  var day1Wind = temperatureData.list[1].wind.speed
-  var day1Humidity = temperatureData.list[1].main.humidity
+   var day3Temp = temperatureData.list[3].main.temp;
+   var day3Wind = temperatureData.list[3].wind.speed;
+   var day3Humidity = temperatureData.list[3].main.humidity;
 
-  var day2Temp = temperatureData.list[2].main.temp
-  var day2Wind = temperatureData.list[2].wind.speed
-  var day2Humidity = temperatureData.list[2].main.humidity
+   var day4Temp = temperatureData.list[4].main.temp;
+   var day4Wind = temperatureData.list[4].wind.speed;
+   var day4Humidity = temperatureData.list[4].main.humidity;
 
-  var day3Temp = temperatureData.list[3].main.temp
-  var day3Wind = temperatureData.list[3].wind.speed
-  var day3Humidity = temperatureData.list[3].main.humidity
-
-  var day4Temp = temperatureData.list[4].main.temp
-  var day4Wind = temperatureData.list[4].wind.speed
-  var day4Humidity = temperatureData.list[4].main.humidity
-
-  var day5Temp = temperatureData.list[5].main.temp
-  var day5Wind = temperatureData.list[5].wind.speed
-  var day5Humidity = temperatureData.list[5].main.humidity
-}
+   var day5Temp = temperatureData.list[5].main.temp;
+   var day5Wind = temperatureData.list[5].wind.speed;
+   var day5Humidity = temperatureData.list[5].main.humidity;
+ }
 
 
   /*
