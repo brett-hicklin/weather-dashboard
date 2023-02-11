@@ -82,35 +82,42 @@
      `${temperatureData.city.name} ${today.format("M[/]D[/]YYYY")}`
    );
    //look up degrees symbol
+   var currentIcon = temperatureData.list[0].weather[0].icon;
+   var currentIconEl = $("#weatherIconCurrent");
+   currentIconEl.attr(
+     "src",
+     `https://openweathermap.org/img/wn/${currentIcon}.png`
+   );
    $("#temp").text(`Temp: ${currentTemp} F`);
    $("#wind").text(`Wind: ${currentWind} MPH`);
    $("#humidity").text(`Humidity: ${currentHumidity}%`);
  }
 
  function show5DayForecast(temperatureData) {
-  var today = dayjs()
-for (var i=1; i<6; i++){
-   $(`#day${[i]}`).text(today.add(i,'day').format("M[/]D[/]YYYY"))
+   var today = dayjs();
+   
+   for (var i = 1; i < 6; i++) {
+    var icons = temperatureData.list[i].weather[0].icon;
+     $(`#day${[i]}`).text(today.add(i, "day").format("M[/]D[/]YYYY"));
+     $(`#weatherIconDay${[i]}`).attr("src",`https://openweathermap.org/img/wn/${icons}.png`)
 
-   var temp = temperatureData.list[i].main.temp;
-   $(`#tempDay${[i]}`).text(`Temp: ${temp} F`);
-   var wind = temperatureData.list[i].wind.speed;
-   $(`#windDay${[i]}`).text(`Wind: ${wind} MPH`);
-   var humidity = temperatureData.list[i].main.humidity;
-   $(`#humidityDay${i}`).text(`Humidity: ${humidity}%`);
-}
-
-  
+     var temp = temperatureData.list[i].main.temp;
+     $(`#tempDay${[i]}`).text(`Temp: ${temp} F`);
+     var wind = temperatureData.list[i].wind.speed;
+     $(`#windDay${[i]}`).text(`Wind: ${wind} MPH`);
+     var humidity = temperatureData.list[i].main.humidity;
+     $(`#humidityDay${i}`).text(`Humidity: ${humidity}%`);
+   }
  }
 
- function removeDuplicates(array){
-  var cities = [];
-  array.forEach(function(city){
-    if(!cities.includes(city)){
-    cities.push(city)
-    }
-  });
-  return cities;
+ function removeDuplicates(array) {
+   var cities = [];
+   array.forEach(function (city) {
+     if (!cities.includes(city)) {
+       cities.push(city);
+     }
+   });
+   return cities;
  }
 
   /*
