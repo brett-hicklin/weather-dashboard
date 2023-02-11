@@ -8,17 +8,17 @@
 
 
  var requestedCity = $("input:text").val();
- var searchBtn = $("#searchBtn");
+ var btn = $(".btn");
  var unorderedCityList = $('#cityList')
  
- searchBtn.on("click", runFetch);
+ btn.on("click", runFetch);
 
  function runFetch(event) {
+  console.log("runfetch")
    event.preventDefault();
    var userInputArray = JSON.parse(localStorage.getItem("recentCity"))
-   
    var userInput = $("#search");
-   var userInputValue = userInput.val();
+   var userInputValue = userInput.val() ||  $(this).text()
    var cityToCoord = `http://api.openweathermap.org/geo/1.0/direct?q=${userInputValue},US&APPID=c30d18cd0f8a02106652813da038e7c8`;
 
    console.log(userInput.val());
@@ -32,12 +32,14 @@
     
   for (var i = 0; i<userInputArray.length; i++){
     var buttonEl = $('<button>')
+    buttonEl.addClass("btn btn-light")
     buttonEl.text(userInputArray[i])
     console.log(buttonEl.text())
     unorderedCityList.append(buttonEl)
     var newLine = $('<div>')
     unorderedCityList.append(newLine)
-
+    
+    buttonEl.on("click", runFetch);
   }
 
 
