@@ -14,7 +14,7 @@
  btn.on("click", runFetch);
 
  function runFetch(event) {
-  console.log("runfetch")
+  
    event.preventDefault();
    var userInputArray = JSON.parse(localStorage.getItem("recentCity"))
    var userInput = $("#search");
@@ -29,12 +29,15 @@
 
   userInputArray.push(userInputValue)
    localStorage.setItem("recentCity",JSON.stringify(userInputArray))
-    
-  for (var i = 0; i<userInputArray.length; i++){
+  
+  
+    var cities = removeDuplicates(userInputArray)
+
+  for (var i = 0; i<cities.length; i++){
     var buttonEl = $('<button>')
     buttonEl.addClass("btn btn-light")
-    buttonEl.text(userInputArray[i])
-    console.log(buttonEl.text())
+    buttonEl.text(cities[i])
+    
     unorderedCityList.append(buttonEl)
     var newLine = $('<div>')
     unorderedCityList.append(newLine)
@@ -85,27 +88,27 @@
  }
 
  function show5DayForecast(temperatureData) {
-   var day1Temp = temperatureData.list[1].main.temp;
-   var day1Wind = temperatureData.list[1].wind.speed;
-   var day1Humidity = temperatureData.list[1].main.humidity;
+for (var i=1; i<6; i++){
+  var temp = temperatureData.list[i].main.temp;
+   $(`#tempDay${[i]}`).text(`Temp: ${temp} F`);
+   var wind = temperatureData.list[i].wind.speed;
+   $(`#windDay${[i]}`).text(`Wind: ${wind} MPH`);
+   var humidity = temperatureData.list[i].main.humidity;
+   $(`#humidityDay${i}`).text(`Humidity: ${humidity}%`);
+}
 
-   var day2Temp = temperatureData.list[2].main.temp;
-   var day2Wind = temperatureData.list[2].wind.speed;
-   var day2Humidity = temperatureData.list[2].main.humidity;
-
-   var day3Temp = temperatureData.list[3].main.temp;
-   var day3Wind = temperatureData.list[3].wind.speed;
-   var day3Humidity = temperatureData.list[3].main.humidity;
-
-   var day4Temp = temperatureData.list[4].main.temp;
-   var day4Wind = temperatureData.list[4].wind.speed;
-   var day4Humidity = temperatureData.list[4].main.humidity;
-
-   var day5Temp = temperatureData.list[5].main.temp;
-   var day5Wind = temperatureData.list[5].wind.speed;
-   var day5Humidity = temperatureData.list[5].main.humidity;
+  
  }
 
+ function removeDuplicates(array){
+  var cities = [];
+  array.forEach(function(city){
+    if(!cities.includes(city)){
+    cities.push(city)
+    }
+  });
+  return cities;
+ }
 
   /*
   create a city search box
