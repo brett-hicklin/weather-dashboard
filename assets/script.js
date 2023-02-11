@@ -4,16 +4,20 @@
 
 
 
- var cityToCoord = 'http://api.openweathermap.org/geo/1.0/direct?q=Dover,NH,US&APPID=c30d18cd0f8a02106652813da038e7c8'
+ 
 
 
  var requestedCity = $('input:text').val()
  var searchBtn = $('#searchBtn')
  searchBtn.on("click",runFetch)
 
- function runFetch() {
-  
-console.log(requestedCity)
+ function runFetch(event) {
+   event.preventDefault();
+   var userInput = $("#search")
+  var userInputValue = userInput.val()
+  var cityToCoord = `http://api.openweathermap.org/geo/1.0/direct?q=${userInputValue},US&APPID=c30d18cd0f8a02106652813da038e7c8`
+
+   console.log(userInput.val());
 
    fetch(cityToCoord)
      .then(function (response) {
@@ -33,25 +37,27 @@ console.log(requestedCity)
          .then(function (temperatureData) {
            console.log(temperatureData);
            showTemperatureStats(temperatureData);
-
-           
-
-
-
-
-
-
-
+           show5DayForecast(temperatureData);
          });
      });
  }
-runFetch()
+
 
 function showTemperatureStats(temperatureData){
   var currentTemp = temperatureData.list[0].main.temp
   var currentWind = temperatureData.list[0].wind.speed
   var currentHumidity = temperatureData.list[0].main.humidity
 
+  var today = dayjs();
+  var cityName = $('#cityName').text(`${temperatureData.city.name} ${today.format("M[/]D[/]YYYY")}`)  
+  //look up degrees symbol
+$('#temp').text(`Temp: ${currentTemp} F`);
+$('#wind').text(`Wind: ${currentWind} MPH`);
+$('#humidity').text(`Humidity: ${currentHumidity}%`)
+
+}
+
+function show5DayForecast(temperatureData){
   var day1Temp = temperatureData.list[1].main.temp
   var day1Wind = temperatureData.list[1].wind.speed
   var day1Humidity = temperatureData.list[1].main.humidity
@@ -71,13 +77,7 @@ function showTemperatureStats(temperatureData){
   var day5Temp = temperatureData.list[5].main.temp
   var day5Wind = temperatureData.list[5].wind.speed
   var day5Humidity = temperatureData.list[5].main.humidity
-
-  var today = dayjs();
-var cityName = $('#cityName').text(`${temperatureData.city.name} ${today.format("M[/]D[/]YYYY")}`)  
-
-
 }
-
 
 
   /*
