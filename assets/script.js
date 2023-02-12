@@ -57,6 +57,7 @@
  }
 
  function showTemperatureStats(temperatureData) {
+  $("#infoDisplay").addClass("forecast mt-2 p-2")
    var currentTemp = temperatureData.list[0].main.temp;
    var currentWind = temperatureData.list[0].wind.speed;
    var currentHumidity = temperatureData.list[0].main.humidity;
@@ -72,14 +73,14 @@
      "src",
      `https://openweathermap.org/img/wn/${currentIcon}.png`
    );
-   $("#temp").text(`Temp: ${currentTemp} F`);
+   $("#temp").text(`Temp: ${currentTemp}  ${String.fromCharCode(176)}F`);
    $("#wind").text(`Wind: ${currentWind} MPH`);
    $("#humidity").text(`Humidity: ${currentHumidity}%`);
  }
 
  function show5DayForecast(temperatureData) {
    var today = dayjs();
-
+   $('#forecastHeader').text("5 Day Forecast")
    for (var i = 1; i < 6; i++) {
     $(`#forecastDay${[i]}`).addClass("forecast")
      var icons = temperatureData.list[i].weather[0].icon;
@@ -90,7 +91,7 @@
      );
 
      var temp = temperatureData.list[i].main.temp;
-     $(`#tempDay${[i]}`).text(`Temp: ${temp} F`);
+     $(`#tempDay${[i]}`).text(`Temp: ${temp} ${String.fromCharCode(176)}F`);
      var wind = temperatureData.list[i].wind.speed;
      $(`#windDay${[i]}`).text(`Wind: ${wind} MPH`);
      var humidity = temperatureData.list[i].main.humidity;
@@ -113,6 +114,7 @@
    var userInputValue = userInput.val() 
    console.log($(this));
    var userInputArray = JSON.parse(localStorage.getItem("recentCity"));
+
    if (userInputArray === null) {
      userInputArray = [];
    }
@@ -129,7 +131,7 @@
    for (var i = 0; i < cities.length; i++) {
      if (i < 10) {
        var buttonEl = $("<button>");
-       buttonEl.addClass("btn btn-light m-1");
+       buttonEl.addClass("btn  btn-light w-100 m-1 p-2");
        buttonEl.text(cities[i].charAt(0).toUpperCase() + cities[i].slice(1));
 
        unorderedCityList.append(buttonEl);

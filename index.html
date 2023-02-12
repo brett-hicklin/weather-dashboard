@@ -14,24 +14,25 @@
     ></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </head>
-<body>
-<navbar class="navbar-expand">Weather Dashboard</navbar>
+<body id="bgColor" class="bg">
+   
+<nav id="navbar" class="navbar navbar-expand bg-dark px-4 text-center"><h2 class="text-center">Weather Dashboard</h2></nav>
+
 
 <div class="container-fluid px-4">
     <div class="row">
 
 
 
-    <div id="citySearch" class="col-3">city search
+    <div id="citySearch" class="col-3">
     
-        <h2>
-            Search for a City:
-        </h2>
-        <form action="">
-            <label for="Search" class="form-label">
+        
+        <form>
+            <label for="Search" class="form-label p-2"> <h4>Search for City:</h4>
             </label>
-            <input type="text" id="search" class="form-control" name="Search" placeholder="Search..." required>
-            <button id="searchBtn" class="btn btn-light m-2">Search</button>
+            <input type="text" id="search" class="form-control m-1" name="Search" placeholder="Search..." required>
+            <button id="searchBtn" class="btn btn-primary w-100 m-1 p-1">Search</button>
+            <hr/>
         </form>
         <div id="cityList">
           
@@ -41,7 +42,7 @@
 
     <div class="col-8">
 
-        <div id="infoDisplay">This is the current city, date, temp, wind, and humidity
+        <div id="infoDisplay" >
             <h2 id="cityName"></h2>
             <img id="weatherIconCurrent"/>
             <p id="temp"></p>
@@ -53,6 +54,7 @@
 
 
         <div id="fiveDayForecast">
+            <h2 id="forecastHeader" class="m-1 p-2"></h2>
             <div class="row">
             <div id="forecastDay1"  class="col m-2">
                 <h5 id="day1"></h5>

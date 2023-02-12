@@ -1,28 +1,31 @@
 *{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#navbar{
+    border: solid black 10px 50px 50px;
+    color: white;
+}
+
+#bgColor{
     color: black;
+    background-color: lightblue;
     
 }
 
-#infoDisplay{
+.currentDay{
 background-color:bisque;
 }
 
 #citySearch{
-background-color: blueviolet;
+background-color: lightblue;
 }
 
-/* #fiveDayForecast{
-background-color: brown;
 
-} */
 
-#cityList{
-    list-style: none;
-}
 
 .forecast{
     border: solid black 2px;
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: lightgray;
     box-shadow: 1px 1px 5px
 }
