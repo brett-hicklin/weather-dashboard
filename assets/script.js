@@ -11,11 +11,23 @@
  var btn = $(".btn");
  var unorderedCityList = $('#cityList')
  
- btn.on("click", runFetch);
+ btn.on("click", inputValidation);
 
- function runFetch(event) {
+ function inputValidation(event){
+  event.preventDefault();
+  var userInput = $("#search");
+  var userInputValue = userInput.val() 
+  if(userInputValue ===""){
+    alert("Please enter a city")
+
+  } else{
+  runFetch()
+  }
+ }
+
+ function runFetch() {
   
-   event.preventDefault();
+  
    var userInputArray = JSON.parse(localStorage.getItem("recentCity"))
    var userInput = $("#search");
    var userInputValue = userInput.val() ||  $(this).text()
@@ -53,13 +65,21 @@
 
    userInput = userInput.val("");
 
-
+  
    fetch(cityToCoord)
      .then(function (response) {
+      console.log(response)
+      if(response.status !==200){
+        alert("No City found")
+      }
        return response.json();
+       
      })
 
      .then(function (CoordData) {
+      if(CoordData.length === 0){
+        alert("Please enter a valid city")
+      } else {
        console.log(CoordData);
        var latitude = CoordData[0].lat;
        var longitude = CoordData[0].lon;
@@ -73,7 +93,9 @@
            console.log(temperatureData);
            showTemperatureStats(temperatureData);
            show5DayForecast(temperatureData);
+           
          });
+        }
      });
  }
 
