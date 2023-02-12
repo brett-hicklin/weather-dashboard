@@ -33,10 +33,12 @@
     unorderedCityList.empty()
     var cities = removeDuplicates(userInputArray)
     cities = cities.reverse()
-    console.log(cities)
+    
+
 
   for (var i = 0; i<cities.length; i++){
-    var buttonEl = $('<button>')
+    if(i<10){
+      var buttonEl = $('<button>')
     buttonEl.addClass("btn btn-light")
     buttonEl.text(cities[i].charAt(0).toUpperCase()+cities[i].slice(1))
     
@@ -45,6 +47,7 @@
     unorderedCityList.append(newLine)
     
     buttonEl.on("click", runFetch);
+  }
   }
 
 
