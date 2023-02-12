@@ -21,7 +21,7 @@
    var userInput = $("#search");
    var userInputValue = userInput.val() || $(this).text();
    //converts the city the user entered to latitude and longitude to be used on the API
-   var cityToCoord = `http://api.openweathermap.org/geo/1.0/direct?q=${userInputValue},US&APPID=c30d18cd0f8a02106652813da038e7c8`;
+   var cityToCoord = `https://api.openweathermap.org/geo/1.0/direct?q=${userInputValue},US&APPID=c30d18cd0f8a02106652813da038e7c8`;
 
    fetch(cityToCoord)
    //provides further validation to make sure the city will return an ok status
