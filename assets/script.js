@@ -27,10 +27,10 @@
     userInputArray = [];
   }
 
-  userInputArray.push(userInputValue)
+   userInputArray.push(userInputValue)
    localStorage.setItem("recentCity",JSON.stringify(userInputArray))
   
-  
+    unorderedCityList.empty()
     var cities = removeDuplicates(userInputArray)
 
   for (var i = 0; i<cities.length; i++){
