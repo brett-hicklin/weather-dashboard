@@ -27,11 +27,13 @@
     userInputArray = [];
   }
 
-   userInputArray.push(userInputValue)
+   userInputArray.push(userInputValue.toLowerCase())
    localStorage.setItem("recentCity",JSON.stringify(userInputArray))
   
     unorderedCityList.empty()
     var cities = removeDuplicates(userInputArray)
+    cities = cities.reverse()
+    console.log(cities)
 
   for (var i = 0; i<cities.length; i++){
     var buttonEl = $('<button>')
@@ -113,7 +115,7 @@
  function removeDuplicates(array) {
    var cities = [];
    array.forEach(function (city) {
-     if (!cities.includes(city)) {
+     if (!cities.includes(city.toLowerCase())) {
        cities.push(city);
      }
    });
