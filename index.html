@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </head>
 <body>
-<navbar class="navbar-expand">this is the navbar</navbar>
+<navbar class="navbar-expand">Weather Dashboard</navbar>
 
 <div class="container-fluid px-4">
     <div class="row">
@@ -31,7 +31,7 @@
             <label for="Search" class="form-label">
             </label>
             <input type="text" id="search" class="form-control" name="Search" placeholder="Search..." required>
-            <button id="searchBtn" class="btn btn-light">Search</button>
+            <button id="searchBtn" class="btn btn-light m-2">Search</button>
         </form>
         <div id="cityList">
           
@@ -54,35 +54,35 @@
 
         <div id="fiveDayForecast">
             <div class="row">
-            <div class="col">
+            <div id="forecastDay1"  class="col m-2">
                 <h5 id="day1"></h5>
                 <img id="weatherIconDay1"/>
                 <p id="tempDay1"></p>
                 <p id="windDay1"></p>
                 <p id="humidityDay1"></p>
             </div>   
-            <div class="col">
+            <div id="forecastDay2" class="col m-2" >
                 <h5 id="day2"></h5>
                 <img id="weatherIconDay2"/>
                 <p id="tempDay2"></p>
                 <p id="windDay2"></p>
                 <p id="humidityDay2"></p>
             </div>
-            <div class="col">
+            <div id="forecastDay3"  class="col m-2">
                 <h5 id="day3"></h5>
                 <img id="weatherIconDay3"/>
                 <p id="tempDay3"></p>
                 <p id="windDay3"></p>
                 <p id="humidityDay3"></p>
             </div>
-            <div class="col">
+            <div id="forecastDay4"  class="col m-2">
                 <h5 id="day4"></h5>
                 <img id="weatherIconDay4"/>
                 <p id="tempDay4"></p>
                 <p id="windDay4"></p>
                 <p id="humidityDay4"></p>
             </div>
-            <div class="col">
+            <div id="forecastDay5"  class="col m-2">
                 <h5 id="day5"></h5>
                 <img id="weatherIconDay5"/>
                 <p id="tempDay5"></p>

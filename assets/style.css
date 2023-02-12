@@ -1,5 +1,6 @@
 *{
     color: black;
+    
 }
 
 #infoDisplay{
@@ -10,11 +11,18 @@ background-color:bisque;
 background-color: blueviolet;
 }
 
-#fiveDayForecast{
+/* #fiveDayForecast{
 background-color: brown;
-}
+
+} */
 
 #cityList{
     list-style: none;
 }
 
+.forecast{
+    border: solid black 2px;
+    border-radius: 20px;
+    background-color: lightgray;
+    box-shadow: 1px 1px 5px
+}

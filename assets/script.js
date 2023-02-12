@@ -62,7 +62,7 @@
    var currentHumidity = temperatureData.list[0].main.humidity;
 
    var today = dayjs();
-   var cityName = $("#cityName").text(
+  $("#cityName").text(
      `${temperatureData.city.name} ${today.format("M[/]D[/]YYYY")}`
    );
    //look up degrees symbol
@@ -81,6 +81,7 @@
    var today = dayjs();
 
    for (var i = 1; i < 6; i++) {
+    $(`#forecastDay${[i]}`).addClass("forecast")
      var icons = temperatureData.list[i].weather[0].icon;
      $(`#day${[i]}`).text(today.add(i, "day").format("M[/]D[/]YYYY"));
      $(`#weatherIconDay${[i]}`).attr(
@@ -128,7 +129,7 @@
    for (var i = 0; i < cities.length; i++) {
      if (i < 10) {
        var buttonEl = $("<button>");
-       buttonEl.addClass("btn btn-light");
+       buttonEl.addClass("btn btn-light m-1");
        buttonEl.text(cities[i].charAt(0).toUpperCase() + cities[i].slice(1));
 
        unorderedCityList.append(buttonEl);
@@ -140,16 +141,5 @@
    }
    userInput = userInput.val("");
  }
-  /*
-  create a city search box
-  search button that fetches the url with the city name but changed to latitude and longitude
-use imperial and geocoding API
-
-grab name from 
-
-
-  dispay searched city with date and with the temp, wind speed, and humidity
-  display the forecast with same info for next 5 days
   
-  */
 
